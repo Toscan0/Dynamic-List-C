@@ -7,16 +7,17 @@ int main()
     
     List* lst = CreateList();
 
-    printf("size: %d\n", lst->size);
-
     DataNode dt;
     dt.value = 5;
     push(lst, dt);
     dt.value = 4;
 	push(lst, dt);
 
-	printf("%d\n", lst->head->dataNode.value);
-	printf("%d\n", lst->head->next->dataNode.value);
+
+	printList(lst);
+
+	pop(lst);
+	printList(lst);
 
     printf("\n--- Program Finished ---\n");
     return 0;
