@@ -7,10 +7,12 @@
 
 #include "listStruct.h"
 
-List* CreateList();
+List* createList();
 void printList(List* lst);
 bool isEmpty(List* lst);
 void push(List* lst, DataNode dt); //add a node to the start of the list
 void pop(List* lst); //remove the first node from the list
+Node* nodeAtPos(List* lst, int index);
+int nodeIndex(List* lst, Node* node);
 
 #endif

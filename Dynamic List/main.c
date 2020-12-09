@@ -1,3 +1,4 @@
+/**/
 #include <stdio.h>
 #include "functions.h"
 
@@ -5,7 +6,7 @@ int main()
 {
     printf("\n--- Program started ---\n");
     
-    List* lst = CreateList();
+    List* lst = createList();
 
     DataNode dt;
     dt.value = 5;
@@ -16,12 +17,44 @@ int main()
 
 	printList(lst);
 
-	pop(lst);
-	printList(lst);
+	
+	printf("%d\n", nodeAtPos(lst, 1)->dataNode.value);
+	//pop(lst);
+	//printList(lst);
 
     printf("\n--- Program Finished ---\n");
     return 0;
 }
+/**/
+
+
+/*int main(){
+	int firstvalue = 5, secondvalue = 15;
+	int * p1, * p2;
+
+	p1 = &firstvalue;  // p1 = address of firstvalue
+	p2 = &secondvalue; // p2 = address of secondvalue
+
+
+
+	*p1 = 10; // value pointed to by p1 = 10, ao mudares o *p1 mudas tbm o firstvalue, 
+	printf("firstvalue is: %d\n", firstvalue); // firstvalue = 10
+
+	*p2 = *p1; // value pointed to by p2 = value pointed to by p1 ou seja o secondvalue = *p2 = *p1 = firstcalue = 10
+	printf("secondvalue is: %d\n", secondvalue); // secondvalue = 10
+
+	p1 = p2; // p1 = p2 (value of pointer is copied) , o p1 que estava a apontar para first value fica a apontar para second value porque p2 = &secondvalue;
+
+
+	*p1 = 20; // aqui ao mudares o *p1 mudas o second value e nao o first value, porcausa da linha acima,  ou seja seconde value = *p1 = *p2 = 20
+
+	printf("firstvalue is: %d\n", firstvalue); 
+	printf("secondvalue is: %d\n", secondvalue); 
+
+	return 0;
+}*/
+ 
+
 
 // #include <stdio.h>
 // #include <stdlib.h> 

@@ -1,6 +1,6 @@
 #include "functions.h"
 
-List* CreateList(){
+List* createList(){
 	List* lst = (List*) malloc(sizeof(List));
 
 	lst->size = 0;
@@ -10,12 +10,12 @@ List* CreateList(){
 }
 
 void printList(List* lst){
-	Node* pointer = lst->head;
+	Node* node = lst->head;
 
 	if(!isEmpty(lst)){
-		while(pointer != NULL){
-			printf("%d ", pointer->dataNode.value);
-			pointer = pointer->next;
+		while(node != NULL){
+			printf("%d ", node->dataNode.value);
+			node = node->next;
 		}
 		printf("\n");
 	}
@@ -42,10 +42,51 @@ void push(List* lst, DataNode dt){
 void pop(List* lst){
 
 	if(!isEmpty(lst)){
-		Node* pointer = lst->head;
-		lst->head = pointer->next;
+		Node* node = lst->head;
+		lst->head = node->next;
 
-		free(pointer);
+		free(node);
 		lst->size--;
 	}
 }
+
+Node* nodeAtPos(List* lst, int index){
+	if(index >= 0 && index < lst->size){
+		Node* node = lst->head;
+
+		for(int i = 0; i < index; i++){
+			node = node->next;
+		}
+		return node;
+	}
+	else{
+		return NULL;
+	}
+}
+
+int nodeIndex(List* lst, Node* node){
+	if(isEmpty(lst)){
+		return -1;
+	}
+	else{
+		Node* auxNode = lst->head;
+
+		while(node != NULL){
+			printf("%d ", node->dataNode.value);
+			node = node->next;
+		}
+	}
+}
+
+/*Node* node = lst->head;
+
+	if(!isEmpty(lst)){
+		while(node != NULL){
+			printf("%d ", node->dataNode.value);
+			node = node->next;
+		}
+		printf("\n");
+	}
+	else{
+		printf("This list is empty\n");
+	}*/
