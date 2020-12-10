@@ -50,7 +50,7 @@ void pop(List* lst){
 	}
 }
 
-Node* nodeAtPos(List* lst, int index){
+Node* getNodeByIndex(List* lst, int index){
 	if(index >= 0 && index < lst->size){
 		Node* node = lst->head;
 
@@ -64,29 +64,105 @@ Node* nodeAtPos(List* lst, int index){
 	}
 }
 
-int nodeIndex(List* lst, Node* node){
+int getNodeIndex(List* lst, Node* node){
+	int index = 0;
+
 	if(isEmpty(lst)){
+		return -1;
+	}
+	else if(node == NULL){
 		return -1;
 	}
 	else{
 		Node* auxNode = lst->head;
 
 		while(node != NULL){
-			printf("%d ", node->dataNode.value);
-			node = node->next;
+			if(node->dataNode.value == auxNode->dataNode.value && 
+				node->next == auxNode->next){
+				return index;
+			}
+			auxNode = auxNode->next;
+			index++;
+		}
+		return -1; //node not found
+	}
+}
+
+
+void deleteNodeByIndex(List* lst, int index){
+	Node *previous, *toDelete; 
+
+	if(!isEmpty(lst)){
+		if(index < 0){
+			printf("index not valid, index used:  %d\n", index);
+		}
+		else if(index == 0){
+			pop(lst);
+		}
+		else{
+			toDelete = getNodeByIndex(lst, index);
+
+			if(toDelete == NULL){
+				printf("index not valid, index used:  %d\n", index);
+			}
+			else{
+				previous = getNodeByIndex(lst, index - 1);
+
+				previous->next = toDelete->next;
+				free(toDelete);
+
+				lst->size--;
+			}
 		}
 	}
 }
 
-/*Node* node = lst->head;
+
+void insertNodeAtIndex(List* lst, DataNode dt, int index){
+	Node *current, *previous;
 
 	if(!isEmpty(lst)){
-		while(node != NULL){
-			printf("%d ", node->dataNode.value);
-			node = node->next;
+		if(index < 0){
+			printf("index not valid, index used:  %d\n", index);
 		}
-		printf("\n");
+		else if(index == 0){
+			push(lst, dt);
+		}
+		else{
+			current = getNodeByIndex(lst, index);
+			previous = getNodeByIndex(lst, index - 1);
+
+			if(current != NULL && previous != NULL){
+				Node* newNode = (Node*) malloc(sizeof(Node));
+
+				newNode->dataNode = dt;
+				
+				previous->next = newNode;
+
+				newNode->next = current;
+
+				lst->size++;
+
+			}
+			else if(current == NULL && previous != NULL){ 
+				//node is the last element
+
+				Node* newLastNode = (Node*) malloc(sizeof(Node));
+				newLastNode->dataNode = dt;
+				newLastNode->next = NULL;
+
+				previous->next = newLastNode;
+
+				lst->size++;
+			}
+			else{
+				printf("index not valid, index used:  %d\n", index);
+			}
+		}
 	}
 	else{
-		printf("This list is empty\n");
-	}*/
+		/*
+		* TODO: if lst is empty add create list and add to the beggin
+		*/
+	}
+}
